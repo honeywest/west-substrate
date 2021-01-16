@@ -116,7 +116,7 @@ impl trie_root::TrieStream for TrieStream {
         //		println!("[append_substream] START own buffer: {:x?}", self.buffer);
         //		println!("[append_substream] START other buffer: {:x?}", data);
         match data.len() {
-            0...31 => {
+            0..=31 => {
                 //				println!("[append_substream] appending data, because data.len() = {}", data.len());
                 data.encode_to(&mut self.buffer)
             }

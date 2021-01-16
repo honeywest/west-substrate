@@ -71,7 +71,7 @@ where
 {
     fn decode<I: Input>(input: &mut I) -> Option<Self> {
         Some(match input.read_byte()? {
-            x @ 0x00...0xef => Address::Index(As::sa(x)),
+            x @ 0x00..=0xef => Address::Index(As::sa(x)),
             0xfc => Address::Index(As::sa(need_more_than(0xef, u16::decode(input)?)?)),
             0xfd => Address::Index(As::sa(need_more_than(0xffff, u32::decode(input)?)?)),
             0xfe => Address::Index(need_more_than(
