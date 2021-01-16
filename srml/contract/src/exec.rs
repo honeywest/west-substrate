@@ -62,7 +62,7 @@ impl<'a, T: Trait> ExecutionContext<'a, T> {
         let dest_code = self.overlay.get_code(&dest);
 
         let (change_set, events) = {
-            let mut overlay = OverlayAccountDb::new(&self.overlay);
+            let overlay = OverlayAccountDb::new(&self.overlay);
 
             let mut nested = ExecutionContext {
                 overlay: overlay,
@@ -135,7 +135,7 @@ impl<'a, T: Trait> ExecutionContext<'a, T> {
         }
 
         let (change_set, events) = {
-            let mut overlay = OverlayAccountDb::new(&self.overlay);
+            let overlay = OverlayAccountDb::new(&self.overlay);
 
             let mut nested = ExecutionContext {
                 overlay: overlay,
