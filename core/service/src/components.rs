@@ -140,7 +140,7 @@ pub trait StartRPC<C: Components> {
 
     fn start_rpc(
         client: Arc<ComponentClient<C>>,
-        network: Arc<network::SyncProvider<ComponentBlock<C>>>,
+        network: Arc<dyn network::SyncProvider<ComponentBlock<C>>>,
         should_have_peers: bool,
         system_info: SystemInfo,
         rpc_http: Option<SocketAddr>,
@@ -159,7 +159,7 @@ where
 
     fn start_rpc(
         client: Arc<ComponentClient<C>>,
-        network: Arc<network::SyncProvider<ComponentBlock<C>>>,
+        network: Arc<dyn network::SyncProvider<ComponentBlock<C>>>,
         should_have_peers: bool,
         rpc_system_info: SystemInfo,
         rpc_http: Option<SocketAddr>,

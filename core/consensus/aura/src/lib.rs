@@ -228,8 +228,6 @@ where
     Error: ::std::error::Error + Send + 'static + From<::consensus_common::Error>,
 {
     let make_authorship = move || {
-        use futures::future;
-
         let client = client.clone();
         let pair = local_key.clone();
         let block_import = block_import.clone();

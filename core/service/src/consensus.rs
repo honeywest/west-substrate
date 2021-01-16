@@ -60,7 +60,7 @@ where
     type Error: std::error::Error;
 
     /// Build a block on top of the given, with inherent extrinsics pre-pushed.
-    fn build_block<F: FnMut(&mut BlockBuilder<Self::Block>) -> ()>(
+    fn build_block<F: FnMut(&mut dyn BlockBuilder<Self::Block>) -> ()>(
         &self,
         at: &BlockId<Self::Block>,
         inherent_data: BasicInherentData,
@@ -99,7 +99,7 @@ where
     type Block = Block;
     type Error = client::error::Error;
 
-    fn build_block<F: FnMut(&mut BlockBuilder<Self::Block>) -> ()>(
+    fn build_block<F: FnMut(&mut dyn BlockBuilder<Self::Block>) -> ()>(
         &self,
         at: &BlockId<Self::Block>,
         inherent_data: BasicInherentData,
@@ -108,7 +108,7 @@ where
         let mut block_builder = self.new_block_at(at)?;
 
         let runtime_api = self.runtime_api();
-        if runtime_api.has_api::<BlockBuilderApi<Block, BasicInherentData>>(at)? {
+        if runtime_api.has_api::<dyn BlockBuilderApi<Block, BasicInherentData>>(at)? {
             runtime_api
                 .inherent_extrinsics(at, &inherent_data)?
                 .into_iter()

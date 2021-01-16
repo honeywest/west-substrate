@@ -61,7 +61,7 @@ build_rpc_trait! {
 /// System API implementation
 pub struct System<B: traits::Block> {
     info: SystemInfo,
-    sync: Arc<network::SyncProvider<B>>,
+    sync: Arc<dyn network::SyncProvider<B>>,
     should_have_peers: bool,
 }
 
@@ -69,7 +69,7 @@ impl<B: traits::Block> System<B> {
     /// Creates new `System` given the `SystemInfo`.
     pub fn new(
         info: SystemInfo,
-        sync: Arc<network::SyncProvider<B>>,
+        sync: Arc<dyn network::SyncProvider<B>>,
         should_have_peers: bool,
     ) -> Self {
         System {

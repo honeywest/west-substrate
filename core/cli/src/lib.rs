@@ -540,7 +540,7 @@ where
     };
     let json = matches.is_present("json");
 
-    let file: Box<Write> = match matches.value_of("output") {
+    let file: Box<dyn Write> = match matches.value_of("output") {
         Some(filename) => Box::new(File::create(filename)?),
         None => Box::new(stdout()),
     };
@@ -596,7 +596,7 @@ where
         };
     }
 
-    let file: Box<Read> = match matches.value_of("input") {
+    let file: Box<dyn Read> = match matches.value_of("input") {
         Some(filename) => Box::new(File::open(filename)?),
         None => Box::new(stdin()),
     };

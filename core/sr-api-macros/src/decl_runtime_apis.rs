@@ -250,7 +250,7 @@ fn generate_client_side_decls(decls: &[ItemTrait]) -> TokenStream {
     let mut result = Vec::new();
 
     for decl in decls {
-        let mut decl = decl.clone();
+        let decl = decl.clone();
 
         let crate_ = generate_crate_access(HIDDEN_INCLUDES_ID);
         let block_id = quote!( #crate_::runtime_api::BlockId<Block> );
