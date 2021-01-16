@@ -120,7 +120,7 @@ where
     ) -> Result<(Vec<u8>, Vec<Vec<u8>>), error::Error> {
         let trie_state = state.try_into_trie_backend().ok_or_else(|| {
             Box::new(state_machine::ExecutionError::UnableToGenerateProof)
-                as Box<state_machine::Error>
+                as Box<dyn state_machine::Error>
         })?;
         self.prove_at_trie_state(&trie_state, overlay, method, call_data)
     }

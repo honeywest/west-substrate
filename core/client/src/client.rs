@@ -1256,8 +1256,6 @@ where
         import_block: ImportBlock<Block>,
         new_authorities: Option<Vec<AuthorityId>>,
     ) -> Result<ImportResult, Self::Error> {
-        use runtime_primitives::traits::Digest;
-
         let ImportBlock {
             origin,
             header,

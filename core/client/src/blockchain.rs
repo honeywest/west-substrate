@@ -83,7 +83,7 @@ pub trait Backend<Block: BlockT>: HeaderBackend<Block> {
     /// Get last finalized block hash.
     fn last_finalized(&self) -> Result<Block::Hash>;
     /// Returns data cache reference, if it is enabled on this backend.
-    fn cache(&self) -> Option<&Cache<Block>>;
+    fn cache(&self) -> Option<&dyn Cache<Block>>;
 
     /// Returns hashes of all blocks that are leaves of the block tree.
     /// in other words, that have no children, are chain heads.

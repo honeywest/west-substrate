@@ -47,13 +47,13 @@ error_chain! {
         }
 
         /// Execution error.
-        Execution(e: Box<state_machine::Error>) {
+        Execution(e: Box<dyn state_machine::Error>) {
             description("execution error"),
             display("Execution: {}", e),
         }
 
         /// Blockchain error.
-        Blockchain(e: Box<std::error::Error + Send>) {
+        Blockchain(e: Box<dyn std::error::Error + Send>) {
             description("Blockchain error"),
             display("Blockchain: {}", e),
         }
@@ -145,8 +145,8 @@ error_chain! {
 }
 
 // TODO [ToDr] Temporary, state_machine::Error should be a regular error not Box.
-impl From<Box<state_machine::Error>> for Error {
-    fn from(e: Box<state_machine::Error>) -> Self {
+impl From<Box<dyn state_machine::Error>> for Error {
+    fn from(e: Box<dyn state_machine::Error>) -> Self {
         ErrorKind::Execution(e).into()
     }
 }
@@ -159,12 +159,12 @@ impl From<state_machine::backend::Void> for Error {
 
 impl Error {
     /// Chain a blockchain error.
-    pub fn from_blockchain(e: Box<std::error::Error + Send>) -> Self {
+    pub fn from_blockchain(e: Box<dyn std::error::Error + Send>) -> Self {
         ErrorKind::Blockchain(e).into()
     }
 
     /// Chain a state error.
-    pub fn from_state(e: Box<state_machine::Error + Send>) -> Self {
+    pub fn from_state(e: Box<dyn state_machine::Error + Send>) -> Self {
         ErrorKind::Execution(e).into()
     }
 }

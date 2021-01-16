@@ -367,7 +367,7 @@ impl<Block: BlockT> blockchain::Backend<Block> for Blockchain<Block> {
         Ok(self.storage.read().finalized_hash.clone())
     }
 
-    fn cache(&self) -> Option<&blockchain::Cache<Block>> {
+    fn cache(&self) -> Option<&dyn blockchain::Cache<Block>> {
         Some(&self.cache)
     }
 
@@ -468,7 +468,7 @@ where
             })
     }
 
-    fn cache(&self) -> Option<&blockchain::Cache<Block>> {
+    fn cache(&self) -> Option<&dyn blockchain::Cache<Block>> {
         Some(&self.cache)
     }
 }

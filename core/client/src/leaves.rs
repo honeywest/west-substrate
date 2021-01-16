@@ -89,7 +89,7 @@ where
 
     /// Read the leaf list from the DB, using given prefix for keys.
     pub fn read_from_db(
-        db: &KeyValueDB,
+        db: &dyn KeyValueDB,
         column: Option<u32>,
         prefix: &[u8],
     ) -> error::Result<Self> {
